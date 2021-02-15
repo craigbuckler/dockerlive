@@ -1,2 +1,3 @@
-# dockerlive
-Docker LIVE code examples
+# An Introduction to Docker LIVE
+
+Docker LIVE code examples.
