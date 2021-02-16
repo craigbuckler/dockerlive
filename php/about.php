@@ -1,9 +1,9 @@
 <?php
-$pageTitle = 'Home page';
+$pageTitle = 'About this site';
 include('template/htmlhead.php');
 ?>
 
-<p>Welcome!</p>
+<p>Further information about this site.</p>
 
 <?php
 include('template/htmlfoot.php');

@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+
+  pagehitdb:
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysecret
+      - MYSQL_DATABASE=pagehit
+      - MYSQL_USER=hituser
+      - MYSQL_PASSWORD=hitpass
+    image: mysql:8
+    container_name: pagehitdb
+    volumes:
+      - pagehitdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - pagehitnet
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    depends_on:
+      - pagehitdb
+    ports:
+      - "8080:8080"
+    networks:
+      - pagehitnet
+
+  pagehit:
+    environment:
+      - NODE_ENV=development
+      - MYSQL_HOST=pagehitdb
+      - MYSQL_DATABASE=pagehit
+      - MYSQL_USER=hituser
+      - MYSQL_PASSWORD=hitpass
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: pagehit
+    depends_on:
+      - pagehitdb
+    command: /bin/sh -c 'npm i && npm run debug'
+    volumes:
+      - ./:/home/node/app
+      - pagehitfiles:/home/node/app/.config
+      - pagehitfiles:/home/node/app/.npm
+      - pagehitfiles:/home/node/app/node_modules
+    ports:
+      - "8104:8104"
+      - "9229:9229"
+    networks:
+      - pagehitnet
+
+volumes:
+  pagehitdata:
+  pagehitfiles:
+
+networks:
+  pagehitnet:
