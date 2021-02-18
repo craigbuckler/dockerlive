@@ -2,13 +2,13 @@ version: '3'
 
 services:
 
-  nodehello:
+  hello:
     environment:
       - NODE_ENV=development
     build:
       context: ./
       dockerfile: Dockerfile
-    container_name: nodehello
+    container_name: hello
     volumes:
       - ./:/home/node/app
       - hellofiles:/home/node/app/.config
