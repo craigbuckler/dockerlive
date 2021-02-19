@@ -1,4 +1,4 @@
-# Docker Apache and PHP 8 Server
+# Docker Apache and PHP8 Server
 
 This project can execute a PHP site in any folder from <https://localhost:8101/>.
 
@@ -10,6 +10,7 @@ Custom Apache and PHP configuration files can be found in the `config` directory
 Build a Docker image from the `config` directory:
 
 ```sh
+cd config
 docker image build -t php8 .
 ```
 
